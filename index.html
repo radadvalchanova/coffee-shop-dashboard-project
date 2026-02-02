@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coffee Shop Dashboard | Rada Valchanova</title>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+  <style>
+    :root{
+      --bg: #f5f6fa;
+      --card: #ffffff;
+      --text: #2e3440;
+      --muted: #4b5563;
+      --line: #e6e8ef;
+      --soft: #eef0fb;
+      --soft2: #f6f7ff;
+      --brand: #6f75c9;
+      --brandShadow: rgba(111,117,201,0.22);
+      --shadow: 0 10px 28px rgba(0,0,0,0.06);
+      --shadowHover: 0 14px 34px rgba(0,0,0,0.08);
+      --radius: 16px;
+    }
+
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Raleway", sans-serif;
+      color: var(--text);
+    }
+    body { background: var(--bg); }
+
+    /* Page container */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 26px 18px 60px;
+    }
+
+    /* Top nav */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .back-link{
+      text-decoration:none;
+      color: var(--brand);
+      font-weight: 600;
+      background: var(--soft2);
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .back-link:hover{
+      background: var(--soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    /* Header card */
+    .hero{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-top{
+      padding: 22px 22px 18px;
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-kicker{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #5b6280;
+      font-weight: 700;
+    }
+    .excel-badge{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #eef0fb, #e3e6f7);
+      border: 1px solid #d8dcf0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 800;
+      color: var(--brand);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+      flex: 0 0 auto;
+    }
+    .hero-body{
+      padding: 18px 22px 22px;
+    }
+    h1{
+      margin: 0 0 10px 0;
+      font-size: 1.9rem;
+      letter-spacing: -0.01em;
+      color: #2a2f3a;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .subtitle{
+      margin: 0 0 14px 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 76ch;
+    }
+
+    /* Tag pills */
+    .tag-row{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 6px 0 18px;
+    }
+    .tag{
+      font-size: 0.84rem;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft2);
+      color: #4c4f69;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+
+    /* Action buttons */
+    .actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .btn{
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--soft2);
+      color: var(--brand);
+      font-weight: 700;
+      padding: 10px 14px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .btn:hover{
+      background: var(--soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+    .btn.primary{
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+      box-shadow: 0 10px 22px var(--brandShadow);
+    }
+    .btn.primary:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(111,117,201,0.26);
+    }
+
+    /* Section cards */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-head{
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(135deg, #ffffff, var(--soft));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .card-title{
+      margin:0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color:#1f2937;
+    }
+    .card-body{ padding: 14px 16px 16px; }
+
+    /* View pills (All / locations) */
+    .pill-row{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill{
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft2);
+      color: #4c4f69;
+      font-weight: 700;
+      padding: 8px 12px;
+      cursor:pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      user-select:none;
+    }
+    .pill:hover{
+      background: var(--soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+    .pill.is-active{
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 10px 22px var(--brandShadow);
+      transform:none;
+    }
+
+    /* Dashboard image */
+    .dash-wrap{
+      padding: 14px 16px 18px;
+      background: #fff;
+    }
+    .dash-img{
+      width: 100%;
+      height: auto;
+      display:block;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+    }
+    .dash-note{
+      margin: 10px 2px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    /* Right column content */
+    .mini-list{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .mini-list li{ margin: 6px 0; }
+
+    .footer{
+      margin-top: 18px;
+      color: #6b7280;
+      font-size: 0.9rem;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <a class="back-link" href="https://radadvalchanova.github.io/" aria-label="Back to portfolio">
+        ← Back to portfolio
+      </a>
+
+      <div style="color:#6b7280;font-size:0.95rem;">
+        Built by <b>Rada Valchanova</b>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-kicker">
+          <div class="excel-badge" title="Excel">X</div>
+          <span>Excel dashboard project</span>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <h1>Coffee Shop Sales Dashboard</h1>
+        <p class="subtitle">
+          A clean, interactive Excel dashboard exploring sales performance across three coffee shop locations
+          (January–June 2023). The focus is simple: make patterns easy to spot and decisions easier to make.
+        </p>
+
+        <div class="tag-row">
+          <span class="tag">Excel</span>
+          <span class="tag">PivotTables</span>
+          <span class="tag">PivotCharts</span>
+          <span class="tag">Slicers</span>
+          <span class="tag">Sales Analysis</span>
+        </div>
+
+        <div class="actions">
+          <!-- Put your files in /assets and these links will work -->
+          <a class="btn primary" href="assets/coffee-shop-dashboard.xlsx" download>
+            Download Excel (dashboard + data)
+          </a>
+          <a class="btn" href="assets/project-brief.pdf" download>
+            Download Project Brief (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main grid -->
+    <div class="grid">
+
+      <!-- LEFT: Dashboard viewer -->
+      <section class="card">
+        <div class="card-head">
+          <h2 class="card-title">Dashboard preview</h2>
+
+          <div class="pill-row" role="tablist" aria-label="Select location view">
+            <button class="pill is-active" data-view="all" role="tab">All locations</button>
+            <button class="pill" data-view="astoria" role="tab">Astoria</button>
+            <button class="pill" data-view="hells" role="tab">Hell’s Kitchen</button>
+            <button class="pill" data-view="lower" role="tab">Lower Manhattan</button>
+          </div>
+        </div>
+
+        <div class="dash-wrap">
+          <img
+            id="dashImg"
+            class="dash-img"
+            src="assets/dashboard-all.png"
+            alt="Dashboard screenshot - all locations"
+            loading="eager"
+          />
+          <p class="dash-note" id="dashNote">
+            This view reflects the slicer set to <b>All locations</b>. Use the pills above to switch location-specific versions.
+          </p>
+        </div>
+      </section>
+
+      <!-- RIGHT: Project summary -->
+      <aside class="card">
+        <div class="card-head">
+          <h2 class="card-title">What’s inside</h2>
+        </div>
+
+        <div class="card-body">
+          <ul class="mini-list">
+            <li><b>Revenue trend (Jan–Jun)</b> to spot growth and seasonality.</li>
+            <li><b>Transactions by weekday</b> to understand weekly rhythm.</li>
+            <li><b>Transactions by hour</b> to identify peak staffing windows.</li>
+            <li><b>Product category performance</b> to see what drives volume.</li>
+            <li><b>Top product types (table)</b> for quick priorities and opportunity spotting.</li>
+          </ul>
+
+          <div style="height:12px;"></div>
+
+          <p style="margin:0;color:#6b7280;line-height:1.6;">
+            <b>Note:</b> The live slicer interaction exists in Excel. On the web page, I’m presenting
+            the same dashboard in four curated snapshots — one for each slicer state — so viewers can still
+            explore the story without downloading anything first.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+
+    <div class="footer">
+      © <span id="year"></span> Rada Valchanova · Coffee Shop Sales Dashboard
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const year = document.getElementById("year");
+      if (year) year.textContent = new Date().getFullYear();
+
+      const pills = Array.from(document.querySelectorAll(".pill"));
+      const img = document.getElementById("dashImg");
+      const note = document.getElementById("dashNote");
+
+      const views = {
+        all: {
+          src: "assets/dashboard-all.png",
+          alt: "Dashboard screenshot - all locations",
+          note: "This view reflects the slicer set to <b>All locations</b>. Use the pills above to switch location-specific versions."
+        },
+        astoria: {
+          src: "assets/dashboard-astoria.png",
+          alt: "Dashboard screenshot - Astoria",
+          note: "This view reflects the slicer set to <b>Astoria</b>."
+        },
+        hells: {
+          src: "assets/dashboard-hells-kitchen.png",
+          alt: "Dashboard screenshot - Hell’s Kitchen",
+          note: "This view reflects the slicer set to <b>Hell’s Kitchen</b>."
+        },
+        lower: {
+          src: "assets/dashboard-lower-manhattan.png",
+          alt: "Dashboard screenshot - Lower Manhattan",
+          note: "This view reflects the slicer set to <b>Lower Manhattan</b>."
+        }
+      };
+
+      function setActive(key) {
+        pills.forEach(p => p.classList.toggle("is-active", p.dataset.view === key));
+        const v = views[key] || views.all;
+
+        if (img) {
+          img.src = v.src;
+          img.alt = v.alt;
+        }
+        if (note) note.innerHTML = v.note;
+      }
+
+      pills.forEach(p => {
+        p.addEventListener("click", () => setActive(p.dataset.view));
+      });
+
+      setActive("all");
+    })();
+  </script>
+</body>
+</html>
