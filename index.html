@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coffee Shop Dashboard | Rada Valchanova</title>
+  <title>Coffee Shop Sales Dashboard | Rada Valchanova</title>
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -28,14 +28,15 @@
       font-family: "Raleway", sans-serif;
       color: var(--text);
     }
-    body { background: var(--bg); }
+    body { background: var(--bg); margin: 0; }
 
     .wrap{
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 26px 18px 60px;
     }
 
+    /* Top nav */
     .topbar{
       display:flex;
       align-items:center;
@@ -62,6 +63,7 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.05);
     }
 
+    /* Hero card */
     .hero{
       background: var(--card);
       border: 1px solid var(--line);
@@ -98,6 +100,7 @@
       box-shadow: 0 10px 24px rgba(0,0,0,0.05);
       flex: 0 0 auto;
     }
+
     .hero-body{
       padding: 18px 22px 22px;
     }
@@ -112,7 +115,7 @@
       margin: 0 0 14px 0;
       color: var(--muted);
       line-height: 1.6;
-      max-width: 76ch;
+      max-width: 80ch;
     }
 
     .tag-row{
@@ -128,9 +131,6 @@
       border: 1px solid var(--line);
       background: var(--soft2);
       color: #4c4f69;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
     }
 
     .actions{
@@ -143,4 +143,302 @@
       border-radius: 14px;
       border: 1px solid var(--line);
       background: var(--soft2);
-     
+      color: #4c4f69;
+      padding: 10px 14px;
+      text-decoration:none;
+      font-weight: 700;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .btn:hover{
+      background: var(--soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+    .btn.primary{
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 10px 22px var(--brandShadow);
+    }
+    .btn.primary:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(111,117,201,0.28);
+    }
+
+    /* Main layout (left wider, right slimmer) */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.45fr 0.55fr; /* ✅ left wider, right slimmer */
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .panel{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel-hd{
+      padding: 14px 16px;
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .panel-title{
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #2a2f3a;
+    }
+
+    /* Pills (one line always) */
+    .pill-row{
+      display:flex;
+      gap: 8px;
+      flex-wrap: nowrap;         /* ✅ no wrap */
+      white-space: nowrap;       /* ✅ no wrap */
+      overflow-x: auto;          /* ✅ scroll if needed */
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+    .pill-row::-webkit-scrollbar{ height: 8px; }
+    .pill-row::-webkit-scrollbar-thumb{
+      background: #dfe3f4;
+      border-radius: 999px;
+    }
+
+    .pill{
+      flex: 0 0 auto;            /* ✅ never shrink into wrap */
+      border: 1px solid var(--line);
+      background: var(--soft2);
+      color: #4c4f69;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor:pointer;
+      transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+    .pill:hover{
+      background: var(--soft);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+    .pill.is-active{
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 10px 22px var(--brandShadow);
+      transform: none;
+    }
+
+    /* Preview */
+    .preview{
+      padding: 14px 16px 16px;
+    }
+    .preview-img{
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      display:block;
+    }
+    .caption{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Right panel content */
+    .content{
+      padding: 14px 16px 16px;
+    }
+    .content ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .content li{ margin: 10px 0; }
+    .note{
+      margin-top: 14px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fbfbff;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.93rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <!-- Change this href to your real portfolio URL -->
+      <a class="back-link" href="https://radadvalchanova.github.io/radadvalchanova.github.io/">
+        ← Back to portfolio
+      </a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-kicker">
+          <span class="excel-badge">X</span>
+          <span>Excel dashboard project</span>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <h1>Coffee Shop Sales Dashboard</h1>
+
+        <p class="subtitle">
+          A clean, interactive Excel dashboard exploring sales performance across three coffee shop locations
+          (January–June 2023). The focus is simple: make patterns easy to spot and decisions easier to make.
+        </p>
+
+        <div class="tag-row">
+          <span class="tag">Excel</span>
+          <span class="tag">PivotTables</span>
+          <span class="tag">PivotCharts</span>
+          <span class="tag">Slicers</span>
+          <span class="tag">Sales Analysis</span>
+        </div>
+
+        <div class="actions">
+          <!-- ✅ Single download button (pack) -->
+          <a class="btn primary" href="assets/coffee-shop-project-files.zip" download>
+            Download project files
+          </a>
+
+          <!-- kept in code, but hidden (you said don't remove) -->
+          <a class="btn" href="assets/project-brief.pdf" download style="display:none;">
+            Download Project Brief (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+
+      <!-- LEFT: preview (wider) -->
+      <div class="panel">
+        <div class="panel-hd">
+          <div class="panel-title">Dashboard preview</div>
+
+          <div class="pill-row" id="pillRow">
+            <button class="pill is-active" data-view="all">All locations</button>
+            <button class="pill" data-view="astoria">Astoria</button>
+            <button class="pill" data-view="hells-kitchen">Hell's Kitchen</button>
+            <button class="pill" data-view="lower-manhattan">Lower Manhattan</button>
+          </div>
+        </div>
+
+        <div class="preview">
+          <!-- ✅ Put your screenshots in /assets and name them like below -->
+          <img
+            id="dashImg"
+            class="preview-img"
+            src="assets/dashboard-all.png"
+            alt="Dashboard screenshot - all locations"
+          />
+
+          <p class="caption" id="dashCaption">
+            This view reflects the slicer set to <b>All locations</b>. Use the pills above to switch to the
+            location-specific versions.
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT: what’s inside (slimmer) -->
+      <div class="panel">
+        <div class="panel-hd">
+          <div class="panel-title">What’s inside</div>
+        </div>
+
+        <div class="content">
+          <ul>
+            <li><b>Revenue trend (Jan–Jun)</b> to spot growth and seasonality.</li>
+            <li><b>Transactions by weekday</b> to understand weekly rhythm.</li>
+            <li><b>Transactions by hour</b> to identify peak staffing windows.</li>
+            <li><b>Product category performance</b> to see what drives volume.</li>
+            <li><b>Top product types (table)</b> for quick priorities and opportunity spotting.</li>
+          </ul>
+
+          <div class="note">
+            <b>Note:</b> The live slicer interaction exists in Excel. On this page, the preview switches between
+            screenshots to reflect each slicer state.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script>
+    (function(){
+      const img = document.getElementById("dashImg");
+      const cap = document.getElementById("dashCaption");
+      const pills = Array.from(document.querySelectorAll(".pill"));
+
+      const views = {
+        "all": {
+          src: "assets/dashboard-all.png",
+          alt: "Dashboard screenshot - all locations",
+          caption: "This view reflects the slicer set to <b>All locations</b>. Use the pills above to switch to the location-specific versions."
+        },
+        "astoria": {
+          src: "assets/dashboard-astoria.png",
+          alt: "Dashboard screenshot - Astoria",
+          caption: "This view reflects the slicer set to <b>Astoria</b>."
+        },
+        "hells-kitchen": {
+          src: "assets/dashboard-hells-kitchen.png",
+          alt: "Dashboard screenshot - Hell's Kitchen",
+          caption: "This view reflects the slicer set to <b>Hell's Kitchen</b>."
+        },
+        "lower-manhattan": {
+          src: "assets/dashboard-lower-manhattan.png",
+          alt: "Dashboard screenshot - Lower Manhattan",
+          caption: "This view reflects the slicer set to <b>Lower Manhattan</b>."
+        }
+      };
+
+      function setActive(btn){
+        pills.forEach(p => p.classList.remove("is-active"));
+        btn.classList.add("is-active");
+      }
+
+      pills.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-view");
+          const v = views[key];
+          if(!v) return;
+
+          setActive(btn);
+          img.src = v.src;
+          img.alt = v.alt;
+          cap.innerHTML = v.caption;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
